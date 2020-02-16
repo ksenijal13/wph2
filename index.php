@@ -18,15 +18,6 @@ $pageController = new PageController($db);
 
 if(isset($_GET['page'])){
     switch($_GET['page']){
-        case "admin":
-            if(isset($_SESSION['admin'])) {
-                $pageController->admin();
-            }else{
-                http_response_code(404);
-                $error = new Error(404);
-                $error->writeError();
-            }
-            break;
         case "login";
             header("Content-type: application/json");
             $loginController = new LoginController($db);
@@ -34,7 +25,7 @@ if(isset($_GET['page'])){
             break;
         case "signout":
             unset($_SESSION['user']);
-            if(isset($_SESSion['admin'])){
+            if(isset($_SESSION['admin'])){
                 unset($_SESSION['admin']);
             }
             $activityController = new ActivityController();
@@ -71,19 +62,6 @@ if(isset($_GET['page'])){
         case "mothersock":
             $sockController = new SockController($db);
             $socks = $sockController->getOneSock($_GET);
-            echo json_encode($socks);
-            break;
-        case "limitadmin":
-            $sockController = new SockController($db);
-            $limit = $_POST['limit'];
-            $socks = $sockController->getAllSocksWithoutCondition($limit);
-            echo json_encode($socks);
-            break;
-        case "delete":
-            $sockController = new SockController($db);
-            $id = $_GET['id'];
-           $limit = $_GET['limit'];
-            $socks = $sockController->deleteSock($id, $limit);
             echo json_encode($socks);
             break;
         case "search":
@@ -126,14 +104,6 @@ if(isset($_GET['page'])){
             $collectionController = new CollectionController($db);
             $collections = $collectionController->getAllCollections();
             echo json_encode($collections);
-            break;
-        case "update":
-            $sockController = new SockController($db);
-            $sockController->updateSock($_POST);
-            break;
-        case "insert":
-            $sockController = new SockController($db);
-            $sockController->insertSock($_POST);
             break;
     }
 } else {

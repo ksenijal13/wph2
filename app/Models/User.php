@@ -67,7 +67,7 @@ class User
             $_SESSION['admin'] = "admin";
             $activityController = new ActivityController();
             $activityController->loggedUser();
-            header("Location: index.php?page=admin");
+            header("Location: admin.php");
         }
 
     }

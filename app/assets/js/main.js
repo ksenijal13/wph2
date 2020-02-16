@@ -85,12 +85,13 @@ $(document).ready(function(){
     );
 });
 function sendLimitAdmin(e){
+    e.preventDefault();
     let limit = $(this).data("limit");
     sessionStorage.setItem("adm-limit", limit);
     $("#pagination-block ul li a").removeClass("active");
     $(this).addClass("active");
     $.ajax({
-        url: "index.php?page=limitadmin",
+        url: "admin.php?page=limitadmin",
         method: "post",
         dataType: "json",
         data: {
@@ -115,23 +116,25 @@ function showSocksAdmin(socks){
             <th>Collection</th>
             <th><i class="fa fa-edit"></i></th>
         </tr>`;
-    for(let sock in socks){
-        html += ` <tr>
+    for(let sock in socks) {
+        if (socks != null) {
+            html += ` <tr>
                 <td>${socks[sock].id}</td>
                 <td>${socks[sock].name}</td>
                 <td class="td_img"><img src="app/assets/img/${socks[sock].sock_image}" alt="${socks[sock].name}"</td>
                 <td>${socks[sock].price}&#36;</td>
                 <td>`;
-                let discount = (socks[sock].discount != null) ? socks[sock].discount : 0;
-                html += `${discount}%</td>
+            let discount = (socks[sock].discount != null) ? socks[sock].discount : 0;
+            html += `${discount}%</td>
                 <td>${socks[sock].cat_name}</td>`;
-        let collection = (socks[sock].collection_name != null) ? socks[sock].collection_name : "none";
-                html += `<td>${collection}</td>
+            let collection = (socks[sock].collection_name != null) ? socks[sock].collection_name : "none";
+            html += `<td>${collection}</td>
                 <td>
                     <button data-id="${socks[sock].id}" class="edit_btn update_btn" type="button">Update</button>
                     <button data-id="${socks[sock].id}" class="edit_btn delete_btn" type="button">Delete</button>
                 </td>
             </tr>`;
+        }
     }
     $("#all_photos_table").html(html);
     $(".delete_btn").click(deleteSock);
@@ -140,7 +143,7 @@ function showSocksAdmin(socks){
 function getDataForUpdateForm(){
     let id = $(this).data("id");
     $.ajax({
-        url: "index.php?page=onesock",
+        url: "admin.php?page=onesock",
         method: "get",
         dataType: "json",
         data: {
@@ -159,7 +162,7 @@ function showUpdateForm(sock){
     console.log(sock);
     $("#update_form_div").show();
     let html = `<form enctype="multipart/form-data" name="update_photo_form" id="update_photo_form"
-    method="POST" action="index.php?page=update" onsubmit="return updateValidation();">
+    method="POST" action="admin.php?page=update" onsubmit="return updateValidation();">
     <table id="all_photos_table" class="upd-table">
     <tr>
          <th>Id</th>
@@ -274,7 +277,7 @@ function closeErrors(e){
 }
 function getCollections(){
     $.ajax({
-        url: "index.php?page=collections",
+        url: "admin.php?page=collections",
         method: "get",
         dataType: "json",
         success: function(collections){
@@ -292,7 +295,7 @@ function getCollections(){
 }
 function getCategories(){
     $.ajax({
-        url: "index.php?page=categories",
+        url: "admin.php?page=categories",
         method: "get",
         dataType: "json",
         success: function(categories){
@@ -317,7 +320,7 @@ function deleteSock(){
     }
     console.log(limit);
     $.ajax({
-        url: "index.php?page=delete",
+        url: "admin.php?page=delete",
         method: "get",
         dataType: "json",
         data: {
@@ -389,6 +392,7 @@ function showYourCartData(socks){
     $(".update-quantity-plus").click(updateQuantity);
     $(".update-quantity-minus").click(updateQuantity);
     $(".delete-from-cart").click(deleteFromCart);
+
 }
 function updateQuantity(e){
     e.preventDefault();
@@ -940,7 +944,7 @@ function showSocks(socksArray){
       let check = sessionStorage.getItem("check");
       console.log("Check: " +check);
       if(check == 1) {
-          html += `<span class="span-cart"><i class="fa fa-shopping-cart"></i><a data-parent="${socks[sock].id_sock}" href="#" class="add-to-cart">Add to Cart</a></span>`;
+          html += `<span class="span-cart"><i class="fa fa-shopping-cart"></i><a data-mother="${socks[sock].id_sock}" href="#" class="add-to-cart">Add to Cart</a></span>`;
       }
 html += `</div>  `;
     }

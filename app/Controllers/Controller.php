@@ -13,7 +13,6 @@ class Controller
         }else {
             include "app/views/fixed/header.php";
         }
-        //include "app/views/slider.php";
         include "app/views/pages/$fileName.php";
         include "app/views/fixed/footer.php";
     }

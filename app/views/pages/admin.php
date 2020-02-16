@@ -29,7 +29,8 @@
     <div id="activity">
         <h4>Activity</h4>
         <p>Number of currently logged in users:
-        <?php use app\Controllers\ActivityController;
+        <?php
+        use app\Controllers\ActivityController;
              $activityController = new ActivityController();
              $number = $activityController->loggedUsersNum();
              echo $number;

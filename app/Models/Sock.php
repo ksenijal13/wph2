@@ -133,12 +133,12 @@ class Sock
         $select->execute();
         $rows = $select->rowCount();
         $socks = 0;
-        if($rows == 1){
-            $socks = $select->fetch();
-        }
-        else {
-            $socks = $select->fetchAll();
-        }
+        //if($select->rowCount()== 1){
+           // $socks = $select->fetch();
+       // }
+       //else {
+           $socks = $select->fetchAll();
+      // }
         return $socks;
     }
     public function countProducts($part, $dataparam){
@@ -290,7 +290,7 @@ class Sock
                 $admin = $_SESSION['user']->username;
                 $activity = $admin . " has updated photo with id: " .$id;
                 $activityController->writeActivity($activity);
-                header("Location: index.php?page=admin");
+                header("Location: admin.php");
             }
         }
     }
@@ -393,7 +393,7 @@ class Sock
                 $admin = $_SESSION['user']->username;
                 $activity = $admin . " has inserted new photo";
                 $activityController->writeActivity($activity);
-                header("Location: index.php?page=admin");
+                header("Location: admin.php");
             }
         }
     }

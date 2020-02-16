@@ -1,6 +1,6 @@
 <h2>Add new socks</h2>
 <form enctype="multipart/form-data" name="insert_sock_form" id="insert_sock_form"
-      method="POST" action="index.php?page=insert"  onsubmit="return insertValidation();">
+      method="POST" action="admin.php?page=insert"  onsubmit="return insertValidation();">
     <table id="insert_table">
         <tr>
             <th>Name</th>
