@@ -63,6 +63,11 @@ if(isset($_SESSION['admin'])) {
                 $socks = $sockController->getOneSockAllInfo($id);
                 echo json_encode($socks);
                 break;
+            default:
+             http_response_code(404);
+            $error = new Error(404);
+            $error->writeError();
+            break;    
         }
     } else {
         $pageController->admin();
