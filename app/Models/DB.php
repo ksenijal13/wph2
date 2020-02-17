@@ -46,9 +46,7 @@ class DB
         $prepare = $this->conn->prepare($query);
         try {
             $result = $prepare->execute($params);
-            if(!$result) {
-                $code = 402;
-            }
+           
         }catch(\PDOException $e){
             $code = 500;
         }
