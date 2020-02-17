@@ -163,6 +163,7 @@ class Sock
     }
     public function deleteSock($id, $limit){
         $query = "DELETE  FROM socks_info WHERE id = ?";
+        $this->conn->executeQueryWithParams("DELETE FROM cart WHERE sock_id = ?", [$id]);
         $array = $this->conn->executeQueryWithParams($query, [$id]);
         $code = $array[0];
         $data = self::getAllSocksWithoutCondition($limit);
