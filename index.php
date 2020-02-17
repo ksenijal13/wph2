@@ -105,6 +105,11 @@ if(isset($_GET['page'])){
             $collections = $collectionController->getAllCollections();
             echo json_encode($collections);
             break;
+        default:
+             http_response_code(404);
+            $error = new Error(404);
+            $error->writeError();
+            break;    
     }
 } else {
     $pageController->home();
