@@ -50,7 +50,7 @@ class DB
                 $code = 402;
             }
         }catch(\PDOException $e){
-            $code = 409;
+            $code = 500;
         }
         $data_array[] = $code;
         $data_array[] = $prepare;
