@@ -23,7 +23,7 @@
         <?php
             if($sock->discount > 0){
                 $price = $sock->price - ($sock->discount / 100 * $sock->price); ?>
-                <p> <?=round($price) ?> <i id="old-price"><?=round($sock->price)?></i>
+                <p> <?=round($price) ?>&#36; <i id="old-price"><?=round($sock->price)?></i>
 
           <?php  }else{
         ?>
